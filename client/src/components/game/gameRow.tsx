@@ -29,6 +29,16 @@ export const GameRow = ({row, word, canFocus}:IGameRow)=>{
     if(e.key==="Enter" && contents[key]&&canFocus)
     {
       //verify the word
+      const guess = contents.join("").toLowerCase();
+      if(word==guess)
+      {
+        alert(`You guessed the word: ${word}`);
+        return;
+      }
+      else
+      {
+        alert(word.slice());
+      }
     }
   };
 
