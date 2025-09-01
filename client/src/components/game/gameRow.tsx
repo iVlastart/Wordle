@@ -25,7 +25,16 @@ export const GameRow = ({row, word, canFocus}:IGameRow)=>{
     {
       document.getElementById(`${row}-${key - 1}`)?.focus();
     }
+
+    if(e.key==="Enter" && contents[key]&&canFocus)
+    {
+      //verify the word
+    }
   };
+
+    useEffect(()=>{
+      document.getElementById('1-0')?.focus();
+    },[]);
     return(
         <div className="flex flex-row justify-center w-full h-20 gap-x-3">
         {contents.map((val, key) => (
