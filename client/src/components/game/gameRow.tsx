@@ -29,7 +29,7 @@ export const GameRow = ({row, word, canFocus}:IGameRow)=>{
     return(
         <div className="flex flex-row justify-center w-full h-20 gap-x-3">
         {contents.map((val, key) => (
-          <textarea
+          <textarea disabled={!canFocus}
             id={`${row}-${key}`}
             key={key}
             className="border border-black w-full h-full text-7xl text-center capitalize resize-none"
