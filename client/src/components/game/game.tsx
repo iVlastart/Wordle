@@ -8,7 +8,7 @@ export const Game = () => {
     const [isActive, setIsActive] = useState(0);
     const [word, setWord] = useState("");
     const loadWord = async ()=>{
-        const res = await axios.get(`http://localhost:8080/word`);
+        const res = await axios.get(`/api/word`);
         setWord(res.data.word);
     };
 
