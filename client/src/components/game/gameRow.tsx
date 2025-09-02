@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, type Dispatch, type SetStateAction } from "react";
 
 interface IGameRow{
     row: number,
     word: string,
-    canFocus: boolean
+    canFocus: boolean,
+    setIsActive: Dispatch<SetStateAction<number>>
 }
 
-export const GameRow = ({row, word, canFocus}:IGameRow)=>{
+export const GameRow = ({row, word, canFocus, setIsActive}:IGameRow)=>{
     const [contents, setContents] = useState(Array(5).fill(""));
     const [styles, setStyles] = useState(Array(5).fill(""));
     const handleInput = (key: number, e: any) => {
@@ -30,6 +31,7 @@ export const GameRow = ({row, word, canFocus}:IGameRow)=>{
     if(e.key==="Enter" && contents[key]&&canFocus)
     {
       //verify the word
+      e.preventDefault();
       const guess = contents.join("").toLowerCase();
       if(word==guess)
       {
@@ -38,14 +40,6 @@ export const GameRow = ({row, word, canFocus}:IGameRow)=>{
       }
       else
       {
-        if(row===5)
-        {
-          alert(`The word was ${word}`);
-          return;
-        }
-        //bg-yellow-500
-        //bg-green-500
-
         const wordArr = word.split("");
         const guessArr = guess.split("");
         const newStyles = [...styles];
@@ -58,12 +52,16 @@ export const GameRow = ({row, word, canFocus}:IGameRow)=>{
         setStyles(newStyles);
       }
       //set the row to ++ here
+      handleRowUpdate();
     }
   };
+  const handleRowUpdate = ()=>{
+    if(row<6) setIsActive(row+1);
+  }
 
     useEffect(()=>{
-      document.getElementById('1-0')?.focus();
-    },[]);
+      if(canFocus) document.getElementById(`${row}-0`)?.focus();
+    },[canFocus, row]);
     return(
         <div className="flex flex-row justify-center w-full h-20 gap-x-3">
         {contents.map((val, key) => (
