@@ -8,6 +8,7 @@ interface IGameRow{
 
 export const GameRow = ({row, word, canFocus}:IGameRow)=>{
     const [contents, setContents] = useState(Array(5).fill(""));
+    const [styles, setStyles] = useState(Array(5).fill(""));
     const handleInput = (key: number, e: any) => {
     const input = e.target.value;
     const newContents = [...contents];
@@ -37,8 +38,26 @@ export const GameRow = ({row, word, canFocus}:IGameRow)=>{
       }
       else
       {
-        alert(word.slice());
+        if(row===5)
+        {
+          alert(`The word was ${word}`);
+          return;
+        }
+        //bg-yellow-500
+        //bg-green-500
+
+        const wordArr = word.split("");
+        const guessArr = guess.split("");
+        const newStyles = [...styles];
+
+        for(let i=0;i<wordArr.length;i++)
+        {
+          if(wordArr[i]===guessArr[i]) newStyles[i] = "bg-green-500";
+          else if(wordArr.includes(guessArr[i])) newStyles[i] = "bg-yellow-500";
+        }
+        setStyles(newStyles);
       }
+      //set the row to ++ here
     }
   };
 
@@ -51,7 +70,8 @@ export const GameRow = ({row, word, canFocus}:IGameRow)=>{
           <textarea disabled={!canFocus}
             id={`${row}-${key}`}
             key={key}
-            className="border border-black w-full h-full text-7xl text-center capitalize resize-none"
+            className={`border border-black w-full h-full text-7xl text-center capitalize resize-none
+                        ${styles[key]}`}
             maxLength={1}
             value={contents[key]}
             onInput={(e) => handleInput(key, e)}

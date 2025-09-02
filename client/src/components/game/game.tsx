@@ -9,6 +9,7 @@ export const Game = () => {
     const loadWord = async ()=>{
         const res = await axios.get(`http://localhost:8080/word`);
         setWord(res.data.word);
+        alert(res.data.word);
     };
 
     useEffect(()=>{
