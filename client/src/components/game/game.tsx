@@ -8,9 +8,8 @@ export const Game = () => {
     const [isActive, setIsActive] = useState(0);
     const [word, setWord] = useState("");
     const loadWord = async ()=>{
-        const res = await axios.get(`/api/word`);
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/word`);
         setWord(res.data.word);
-        alert(res.data.word)
     };
 
     useEffect(()=>{
