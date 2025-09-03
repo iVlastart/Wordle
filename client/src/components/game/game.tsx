@@ -10,6 +10,7 @@ export const Game = () => {
     const loadWord = async ()=>{
         const res = await axios.get(`/api/word`);
         setWord(res.data.word);
+        alert(res.data.word)
     };
 
     useEffect(()=>{
