@@ -6,7 +6,7 @@ const data = require('./5-letter-words.json');
 const app = express();
 
 const corsOptions = {
-    origin: 'http://localhost:5173'
+    origin: process.env.ORIGIN
 }
 
 app.use(cors(corsOptions));
