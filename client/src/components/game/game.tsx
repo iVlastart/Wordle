@@ -18,7 +18,7 @@ export const Game = () => {
 
     return (
         <main className="h-full w-full px-5 md:px-52 pt-5 flex flex-col gap-y-3">
-            {rows.map((row, key) => (
+            {rows.map((_, key) => (
                 <GameRow word={word} key={key} row={key} canFocus={key===isActive} setIsActive={setIsActive}/>
             ))}
         </main>
